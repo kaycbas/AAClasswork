@@ -1,0 +1,11 @@
+.col {
+    float: left;
+}
+
+.col-3 {
+    width: 30%;
+}
+
+.col-6 {
+    width: 70%;
+}
