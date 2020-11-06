@@ -1,0 +1,23 @@
+.sections-nav {
+    display: flex;
+    justify-content: center;
+	align-items: center;
+	border-bottom: 1px solid $light-gray;
+    position: relative;
+    font-family: $sans-serif;
+
+    li {
+        margin: 10px;
+    }
+
+    li:hover {
+        background: $lightest-gray;
+        text-decoration: underline;
+    }
+}
+
+@media all and (max-width: 1000px) {
+    .sections-nav {
+        display: none;
+    }
+}
