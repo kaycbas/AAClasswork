@@ -1,0 +1,36 @@
+<h1><%= @post.title %></h1>
+
+<% if @post.url %>
+    <a href="<%= @post.url %>"><%= @post.url %></a>
+<% end %>
+
+<% if @post.content %>
+    <p><%= @post.content %></p>
+<% end %>
+
+<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+  <option selected disabled>---This post's subs---</option>
+  <% @post.subs.each do |sub| %>
+    <option value="<%= sub_url(sub) %>">
+      <%= sub.title %>
+    </option>
+  <% end %>
+</select>
+<br>
+<% if @post.author == current_user %>
+  <a href="<%= edit_post_url(@post) %>">Edit Post</a>
+<% end %>
+<p></p>
+<a href="<%= new_post_comment_url(@post) %>">Add Comment</a>
+<br>
+<div style="border: 1px solid black;">
+  <div style="padding: 5px"></div>
+  <% @post.comments.each do |comment| %>
+    <strong style="margin: 20px 0px 10px 30px; padding-top: 20px;"><%= comment.author.username %>:</strong>
+    <li style="width: 400px; margin: 10px 30px;">
+      <%= comment.content %>
+    </li>
+  <% end %>
+</div>
+<br>
+<a href="<%= subs_url %>">All Subs</a>
