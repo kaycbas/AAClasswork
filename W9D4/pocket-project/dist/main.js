@@ -31,7 +31,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _war
 /*! runtime requirements:  */
 /***/ (() => {
 
-eval("\nconst dogs = {\n  \"Corgi\": \"https://www.akc.org/dog-breeds/cardigan-welsh-corgi/\",\n  \"Australian Shepherd\": \"https://www.akc.org/dog-breeds/australian-shepherd/\",\n  \"Affenpinscher\": \"https://www.akc.org/dog-breeds/affenpinscher/\",\n  \"American Staffordshire Terrier\": \"https://www.akc.org/dog-breeds/american-staffordshire-terrier/\",\n  \"Tosa\": \"https://www.akc.org/dog-breeds/tosa/\",\n  \"Labrador Retriever\": \"https://www.akc.org/dog-breeds/labrador-retriever/\",\n  \"French Bulldog\": \"https://www.akc.org/dog-breeds/french-bulldog/\" \n};\n\nfunction dogLinkCreator(dogs) {\n  let dogLinks = [];\n  Object.keys(dogs).forEach(dog => {\n    let a = document.createElement(\"a\");\n    a.innerHTML = dog;\n    a.href = dogs[dog];\n    let li = document.createElement(\"li\");\n    li.classList.add(\"dog-link\");\n    li.appendChild(a);\n    dogLinks.push(li);\n  });\n  return dogLinks;\n}\n\nfunction attachDogLinks(){\n  let dogLinks = dogLinkCreator(dogs);\n  let ul = document.querySelector('.drop-down-dog-list')\n  dogLinks.forEach(li => {\n    ul.appendChild(li);\n  });\n}\n\nattachDogLinks();\n\n//# sourceURL=webpack:///./src/drop_down.js?");
+eval("\nconst dogs = {\n  \"Corgi\": \"https://www.akc.org/dog-breeds/cardigan-welsh-corgi/\",\n  \"Australian Shepherd\": \"https://www.akc.org/dog-breeds/australian-shepherd/\",\n  \"Affenpinscher\": \"https://www.akc.org/dog-breeds/affenpinscher/\",\n  \"American Staffordshire Terrier\": \"https://www.akc.org/dog-breeds/american-staffordshire-terrier/\",\n  \"Tosa\": \"https://www.akc.org/dog-breeds/tosa/\",\n  \"Labrador Retriever\": \"https://www.akc.org/dog-breeds/labrador-retriever/\",\n  \"French Bulldog\": \"https://www.akc.org/dog-breeds/french-bulldog/\" \n};\n\nfunction dogLinkCreator(dogs) {\n  let dogLinks = [];\n\n  Object.keys(dogs).forEach(dog => {\n    let a = document.createElement(\"a\");\n    a.innerHTML = dog;\n    a.href = dogs[dog];\n\n    let li = document.createElement(\"li\");\n    li.classList.add(\"dog-link\");\n    li.appendChild(a);\n\n    dogLinks.push(li);\n  });\n\n  return dogLinks;\n}\n\nfunction attachDogLinks(){\n  let dogLinks = dogLinkCreator(dogs);\n  \n  let ul = document.querySelector('.drop-down-dog-list')\n  dogLinks.forEach(li => {\n    ul.appendChild(li);\n  });\n}\n\nattachDogLinks();\n\n//# sourceURL=webpack:///./src/drop_down.js?");
 
 /***/ }),
 
@@ -45,7 +45,19 @@ eval("\nconst dogs = {\n  \"Corgi\": \"https://www.akc.org/dog-breeds/cardigan-w
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _warmup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./warmup */ \"./src/warmup.js\");\n/* harmony import */ var _clock__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./clock */ \"./src/clock.js\");\n/* harmony import */ var _drop_down__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./drop_down */ \"./src/drop_down.js\");\n/* harmony import */ var _drop_down__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_drop_down__WEBPACK_IMPORTED_MODULE_2__);\n;\n\n\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _warmup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./warmup */ \"./src/warmup.js\");\n/* harmony import */ var _clock__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./clock */ \"./src/clock.js\");\n/* harmony import */ var _drop_down__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./drop_down */ \"./src/drop_down.js\");\n/* harmony import */ var _drop_down__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_drop_down__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _todo_list__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./todo_list */ \"./src/todo_list.js\");\n/* harmony import */ var _todo_list__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_todo_list__WEBPACK_IMPORTED_MODULE_3__);\n;\n\n\n\n\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/todo_list.js":
+/*!**************************!*\
+  !*** ./src/todo_list.js ***!
+  \**************************/
+/*! unknown exports (runtime-defined) */
+/*! runtime requirements:  */
+/***/ (() => {
+
+eval("\n\n// let todos = [];\nlet todoUl = document.querySelector(\".todos\");\nlet todoForm = document.querySelector(\".add-todo-form\");\nlet todos = JSON.parse(localStorage.getItem('items')) || [];\n\nfunction addTodo(e) {\n    e.preventDefault();\n\n    let input = document.querySelector(\"input[name='add-todo']\");\n    let inputVal = input.value;\n\n    let todo = {\n        'content': inputVal,\n        'done': false\n    };\n\n    todos.push(todo);\n    localStorage.setItem('items', JSON.stringify(todos));\n    todoForm.reset();\n\n    populateList();\n}\n\nfunction populateList() {\n    todoUl.innerHTML = '';\n    todos.forEach(todo => {\n        let label = document.createElement(\"label\");\n        label.innerHTML = todo.content;\n\n        let li = document.createElement(\"li\");\n        li.appendChild(label);\n\n        todoUl.appendChild(li);\n    })\n}\n\nfunction strikeLi(e) {\n    let li = e.target;\n    li.style.textDecoration = \"line-through\";\n    li.data\n}\n\ntodoForm.addEventListener(\"submit\", addTodo);\n\ntodoUl.addEventListener(\"click\", strikeLi);\n\npopulateList();\n\n//# sourceURL=webpack:///./src/todo_list.js?");
 
 /***/ }),
 
